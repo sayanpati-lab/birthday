@@ -56,14 +56,12 @@ h2 {
   margin:auto;
   animation:float 3s ease-in-out infinite;
 }
-@keyframes float {
-  50% { transform: translateY(-15px); }
-}
+@keyframes float {50%{transform:translateY(-15px)}}
 
 /* CAKE GLOW */
 @keyframes cakeGlow {
-  0% { filter: drop-shadow(0 0 10px rgba(255,255,255,.4)); }
-  100% { filter: drop-shadow(0 0 30px rgba(255,255,255,1)); }
+  from { box-shadow: 0 0 10px rgba(255,255,255,0.4); }
+  to   { box-shadow: 0 0 35px rgba(255,255,255,1); }
 }
 
 .layer {
@@ -97,36 +95,32 @@ h2 {
 /* CANDLE BODY GLOW */
 .candle {
   position:absolute;
-  top:-55px;
+  top:-50px;
   left:110px;
   width:22px;
-  height:55px;
+  height:50px;
   background:white;
   border-radius:6px;
-  animation: candleGlow 1.5s infinite alternate;
+  animation:candleGlow 1.5s infinite alternate;
 }
-
 @keyframes candleGlow {
   from { box-shadow: 0 0 10px white; }
-  to   { box-shadow: 0 0 25px white, 0 0 45px #ffff99; }
+  to   { box-shadow: 0 0 30px white, 0 0 50px #ffff99; }
 }
 
 /* FLAME GLOW */
 .flame {
   position:absolute;
-  top:-30px;
+  top:-28px;
   left:4px;
   width:14px;
-  height:30px;
+  height:26px;
   background:radial-gradient(circle,yellow,orange,red);
   border-radius:50%;
   animation:flicker .35s infinite alternate;
-  box-shadow:0 0 25px orange,0 0 50px red;
+  box-shadow:0 0 25px orange,0 0 45px red;
 }
-
-@keyframes flicker {
-  to { transform: scale(1.5); }
-}
+@keyframes flicker {to{transform:scale(1.5)}}
 
 /* BUTTON */
 .play-btn {
@@ -150,12 +144,12 @@ h2 {
 <h1>🎉 Happy Birthday Arpita 🎂</h1>
 <h2>@_.bubblixie._ 💖</h2>
 
-<div class="cake">
+<div class="cake" id="cake">
   <div class="layer l3"></div>
   <div class="layer l2"></div>
   <div class="layer l1"></div>
   <div class="candle">
-    <div class="flame"></div>
+    <div class="flame" id="flame"></div>
   </div>
 </div>
 
@@ -168,17 +162,19 @@ h2 {
 <script>
 const song = document.getElementById("song");
 
+/* INTRO CLICK */
 document.getElementById("intro").onclick = async () => {
   document.getElementById("intro").style.display="none";
   await playMusic();
 };
 
+/* PLAY FUNCTION */
 async function playMusic() {
   try {
     song.volume = 1;
     await song.play();
   } catch (e) {
-    console.log("Audio blocked:", e);
+    console.log("Playback blocked:", e);
   }
 }
 </script>
